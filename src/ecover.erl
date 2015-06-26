@@ -4,7 +4,7 @@
          analyse/0,
          merge/0]).
 
--type coverage() :: tuple(atom(), atom(), integer(), integer()).
+-type coverage() :: {atom(), atom(), integer(), integer()}.
 
 pmap(F, L) ->
     Self = self(),
@@ -21,7 +21,7 @@ collect([H|T]) ->
 collect([]) ->
     [].
 
--spec compile() -> list(tuple(ok, atom())).
+-spec compile() -> list({ok, atom()}).
 compile() ->
     cover:start(),
     pmap(fun(M) ->
@@ -127,7 +127,7 @@ get_modules() ->
                         Acc ++ Mods
                 end, [], AppsConfigs).
 
--spec get_applications_for_modules(list(atom())) -> list(tuple(atom(), atom())).
+-spec get_applications_for_modules(list(atom())) -> list({atom(), atom()}).
 get_applications_for_modules(Modules) ->
     lists:map(fun(M) ->
                       try
